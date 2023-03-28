@@ -4,7 +4,7 @@ from django.urls import reverse
 class Post(models.Model):                                # inheritance
     title = models.CharField(max_length=256)             # composition
     subtitle = models.CharField(max_length=256) 
-    author =  models.ForeignKey('auth.User', on_delete=models.CASCADE, default="default") 
+    author =  models.ForeignKey('auth.User', on_delete=models.CASCADE) 
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
 
