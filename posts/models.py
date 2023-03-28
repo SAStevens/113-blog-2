@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+from django.contrib.auth import urls
+
 class Post(models.Model):                                # inheritance
     title = models.CharField(max_length=256)             # composition
     subtitle = models.CharField(max_length=256) 
