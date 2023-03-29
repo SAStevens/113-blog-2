@@ -14,19 +14,19 @@ class PostListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         published_status = Status.objects.get(name="published")
-        context["post/list"] = Post.objects.filter(status=published_status).order_by("created_on").reverse()
+        context["post_list"] = Post.objects.filter(status=published_status).order_by("created_on").reverse()
         context["timestamp"] = datetime.now().strftime("%F %H:%M:%S")
         return context
 
 
-class DraftPostListView(ListView):
+class DraftPostListView(LoginRequiredMixin, ListView):
     template_name = "posts/list.html"
     model = Post
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         unpublished_status = Status.objects.get(name="unpublished")
-        context["post/list"] = Post.objects.filter(author=self.request.user).order_by("created_on").reverse()
+        context["post_list"] = Post.objects.filter(status=unpublished_status).filter(author=self.request.user).order_by("created_on").reverse()
         context["timestamp"] = datetime.now().strftime("%F %H:%M:%S")
         return context
 

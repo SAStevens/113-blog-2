@@ -4,14 +4,13 @@ from django.db import migrations
 
 def populate_status(apps, schemaeditor):
     status = {
-        "published": "A blog post that is visibleto everyone.",
+        "published": "A blog post that is visible to everyone.",
         "unpublished": "A blog post in draft mode, visible only to the author."
     }
     Status = apps.get_model("posts", "Status")
     for key, desc in status.items():
         status_obj = Status(name=key, description=desc)
         status_obj.save()
-
 
 
 class Migration(migrations.Migration):
